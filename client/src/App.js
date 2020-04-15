@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
 import ItemForm from "./components/itemForm";
+import ItemCard from './components/itemCard'
 import {Button} from 'react-bootstrap'
 
 class App extends Component {
@@ -47,22 +48,10 @@ class App extends Component {
     })
   }
 
-  renderItems = () => {
-    return this.state.items.map(item => {
-      return (
-        <div key={item.id} style={styles.itemView}>
-          <p>{item.name}</p>
-          <img src={item.image} />
-          <p>{item.description}</p>
-      <p>{item.likes}{() => this.upVote(item.id)}</p>
-        </div>
-      );
-    });
-  };
 
   render() {
     return (
-      <div className="App">
+      <div className="App" style={styles.main}>
         <h1>Mock Interview</h1>
         <Button onClick={this.toggleForm}>
         {this.state.showForm ? "Close Form" : "New Item"}
@@ -70,7 +59,7 @@ class App extends Component {
         {this.state.showForm ? <ItemForm getItems={this.getItems}/> : null}
         <Button onClick={this.sortByMostLikes}>Sort by Most Likes</Button>
         <Button onClick={this.sortByLeastLikes}>Sort by Least Likes</Button>
-        {this.renderItems()}
+        {this.state.items.map(item => ItemCard(item))}
       </div>
     );
   }
@@ -81,13 +70,16 @@ export default App;
 
 const styles = {
   itemView: {
-    width: '500px',
-    height: '300px'
+    width: "500px",
+    height: "300px"
   },
-  upVote :{
-    width: '1em',
-    height: '1em',
+  upVote: {
+    width: "1em",
+    height: "1em",
     backgroundRepeat: "no-repeat",
-    backgroundSize: "1rem 1rem",
+    backgroundSize: "1rem 1rem"
+  },
+  main: {
+    backgroundColor: "rgb(243,244,246)"
   }
-}
+};
