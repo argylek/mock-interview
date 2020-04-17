@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import Snap from "snapsvg-cjs";
+import React from "react";
+import "../App.css";
 
 export default function itemCard(item) {
   return (
@@ -10,14 +10,13 @@ export default function itemCard(item) {
       </div>
       <div>
         <div style={styles.card.description}>{item.description}</div>
-        <button style={styles.card.upVoteButton}>{item.likes}</button>
+        <button style={styles.card.upVoteButton}>
+          <div className="upVote">{item.likes}</div>
+        </button>
       </div>
     </div>
   );
 }
-const main = Snap("../style_SVG/like_default.svg");
-const hover = Snap("../style_SVG/like_hover.svg");
-const visited = Snap("../style_SVG/like_visited.svg");
 
 const styles = {
   card: {
@@ -61,18 +60,13 @@ const styles = {
     upVoteButton: {
       height: "24px",
       width: "50px",
-      radius: "12px",
+      borderRadius: "12px",
       float: "right",
-      position: 'relative',
+      position: "relative",
       bottom: "20px",
       right: "10px",
-
-      ":hover": {
-        background: "purple"
-      },
-      ":visited": {
-        background: "blue"
-      }
+      textAlign: "right",
+      display: "block"
     }
   }
 };
